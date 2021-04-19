@@ -13,7 +13,7 @@ namespace Chess {
 		public board() {
 			chessboard = new cell[8, 8];
 			white_move = true;
-			a1h1e1a8h8e8 = new bool[6] {true, true, true, true, true, true};
+			a1h1e1a8h8e8 = new bool[6];
 			white_king = new int[2] { 7, 4 };
 			black_king = new int[2] { 0, 4 };
 			ResetBoard();
@@ -46,6 +46,9 @@ namespace Chess {
 			for (int j = 0; j < 8; j++) {
 				chessboard[1, j].state = cell.status.BlackPawn;
 				chessboard[6, j].state = cell.status.WhitePawn;
+			}
+			for (int i = 0; i < 6; i++) {  // reset castling restrictions
+				a1h1e1a8h8e8[i] = true;
 			}
 			show();
 		}
@@ -484,10 +487,10 @@ namespace Chess {
 				}
 				else if (command == "0-0" || command == "o-o") {
 					if (current_board.white_move) {
-						current_board.move("e1f1");
+						current_board.move("e1g1");
 					}
 					else {
-						current_board.move("e8c8");
+						current_board.move("e8g8");
 					}
 				}
 				else if (command == "0-0-0" || command == "o-o-o") {
